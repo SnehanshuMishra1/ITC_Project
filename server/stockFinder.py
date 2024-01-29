@@ -3,6 +3,10 @@ import os
 import pandas as pd
 import sqlalchemy as db
 
+apiKey1 = 'CHY50YH3POMSDAZ5'
+apiKey2 = '6SNXYKZBAXVF49QK'
+apiKey3 = 'J7VK8LVVOOH9YXQF'
+
 engine = db.create_engine('sqlite:///mydatabase.db')
 
 df_ticker_symbols = pd.read_csv('./stocks-list.csv')
@@ -47,16 +51,17 @@ class StockFinder:
 
 class APIResponseFetcher():
     
-    def by_symbol(self, symbol):
-        api_key = 'demo'
-        url = f"https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers={symbol}&apikey={api_key}"
+    def by_symbol(self, ticker):
+        api_key = apiKey3
+        url = f"https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers={ticker}&apikey={api_key}"
         return requests.get(url).json()
+        # return dummyNewsData
     
     def by_topic(self, topic):
-        # api_key = 'demo'
-        # url = f"https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics={topic}&apikey={api_key}"
-        # return requests.get(url).json()
-        return dummyNewsData
+        api_key = apiKey3
+        url = f"https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics={topic}&apikey={api_key}"
+        return requests.get(url).json()
+        # return dummyNewsData
     
 
 dummyNewsData = {'items': '50',
